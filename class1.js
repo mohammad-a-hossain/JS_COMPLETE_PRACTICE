@@ -1,10 +1,10 @@
-/* console.log('hi this is suhel')
+/*  console.log('hi this is suhel')
 console.log(3434)
 console.log(44.25)
 console.log('its time for js ' +100)
 console.log(9 + 9)
 console.log('8' + 9)
- */
+  */
 
 //-----------------------------------------------
 
