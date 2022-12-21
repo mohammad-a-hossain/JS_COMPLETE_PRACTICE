@@ -6,6 +6,16 @@ console.log(9 + 9)
 console.log('8' + 9)
   */
 
+
+
+//DATA TYPE---
+
+PRIMITIVE
+
+OBJECT
+
+
+
 //-----------------------------------------------
 
 //type conversion
