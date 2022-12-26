@@ -222,5 +222,122 @@ console.log(ano1)
 console.log(ano2)
 console.log(ano3)
 
-// stack
+// for each practise
+
+/* function reuse(arr){
+    for(let i=0; i< arr.length; i++){
+          logic(arr[i],i,arr)
+    }
+}
+function logic(value, index, arr){
+    console.log(value, index, arr)
+}
+
+reuse([3,4,5])
+ */
+
+/* function myForeach(arr, cb){
+    for(let i=0; i< arr.length; i++){
+         cb(arr[i],i,arr)
+    }
+}
+let numb=[1,2,3,4,5]
+let summ=0
+myForeach(numb,function(v){
+ summ += v
+})
+console.log(summ)
+ */
+
+/* const numb=[1,2,3,4,5]
+numb.forEach((value,index)=>{
+    console.log(`${index} + 1 : ${value}`);
+}) */
+
+
+
+// m a p 
+
+const namess =['abu kabu','hossain md', 'arron bd','jhoy jon']
+/* 
+
+function reuse(arr,logic){
+    for(let i=0; i< arr.length; i++){
+          logic(arr[i],i,arr)
+    }
+}
+let result=[] 
+ reuse(namess,(value)=>{
+    result.push(value.length)
+ })
+
+console.log(result)
+
+let result1= []
+reuse(namess,(value)=>{
+    result1.push(value.toUpperCase())
+})
+console.log(result1)
+
+let result2= []
+reuse(namess,(value)=>{
+    result1.push(value.substr(4))
+})
+console.log(result2)
+
+ */
+
+function reuseforMap(arr,logic){
+    resultt=[]
+    for(let i=0; i< arr.length; i++){
+        resultt.push(logic(arr[i],i,arr))
+    }
+    return resultt
+}
+
+const length=  reuseforMap(namess,(value)=> value.length)
+const upperCase= reuseforMap(namess,(value)=> value.toUpperCase())
+//console.log(length)
+//console.log(upperCase)
+
+const length2=  namess.map((value)=> value.length)
+const upperCase2= namess.map((value)=> value.toUpperCase())
+//console.log(length2)
+//console.log(upperCase2)
+
+
+// example
+const users=[
+    {id:1, name:'abu hossain',email:'abu@gmail.com', cgpa:3.23,payment:'due'},
+    {id:2, name:'kabu hossain',email:'kabu@gmail.com', cgpa:2.23,payment:'due'},
+    {id:3, name:'labu hossain',email:'labu@gmail.com', cgpa:2.23,payment:'paid'},
+    {id:4, name:'sabu hossain',email:'sabu@gmail.com', cgpa:3.23,payment:'due'},
+    {id:5, name:'jabu hossain',email:'jabu@gmail.com', cgpa:1.23,payment:'paid'}
+]
+
+const resultsendNotice= users.map((value)=>{
+    return{
+        ...value,
+        titile:`hello mr ${value.name} your result has publised`,
+        msg:`your result is ${value.cgpa} you are ${value.cgpa > 2 ? 'pass':'fail'}`
+    }
+})
+//console.log(resultsendNotice)
+
+
+
+// filter
+
+
+
+const emailTemplet = users.filter((value)=> value.payment =='paid').map((value)=>{
+   return{
+    ...value,
+    msg:`your resut has pulished your are ${value.cgpa >= 2? 'pass':'fail'}`
+   }
+
+})
+//console.log(emailTemplet)
+
+
 
