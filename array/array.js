@@ -270,7 +270,7 @@ const matrixSum = (matrixA, matrixB) => {
 };
 
 const matrixC = matrixSum(matrixA, matrixB);
-console.log(matrixC); // [ [ 1, 3 ], [ 8, 5 ], [ 3, 3 ] ]
+//console.log(matrixC); // [ [ 1, 3 ], [ 8, 5 ], [ 3, 3 ] ]
 /* আমরা প্রথমে matrixA এবং matrixB নামের দুইটি ম্যাট্রিক্স নিয়েছি। এরপর এই দুটো ম্যাট্রিক্স যোগ করার জন্য একটি ফাংশন লিখেছি matrixSum নামের। আমরা ফাইনাল রেজাল্ট রাখার জন্য প্রথম লুপের বাইরে result নামক একটি ফাঁকা Array ইনিশিয়ালাইজ করেছি। এরপর আমরা two dimensional way তে দুটি ম্যাট্রিক্সের Array কে ট্রাভার্স করে রেজাল্ট Array তে মানগুলো push method দ্বারা result Array তে যোগ করেছি। শেষে আপডেটেড result Array টা আমরা রিটার্ন করেছি।
  */
 
@@ -303,4 +303,51 @@ function matrixAdd(A,B){
 }
 
 var res= matrixAdd(numA,numB)
-console.log(res)
+//console.log(res)
+
+
+/* task new for getting only number elements IMPERATIVE WAY */
+
+let combArray=[1,2,3,true,undefined,4,false,6,7,'',8,'text',9,10]
+
+let count =0
+
+for(let i=0; i< combArray.length; i++){
+
+	for(let j=i; j< combArray.length -1; j++){
+		if(!combArray[j] || typeof combArray[j] !== 'number' ){
+			combArray[j] = combArray[j +1]
+			combArray[j +1] = undefined 
+		}
+	}
+
+	if(combArray[i] === undefined){
+	count++
+}
+}
+combArray.length -= count 
+
+console.log(combArray)
+ /* 
+
+ [
+  1, 2, 3,  4, 6,
+  7, 8, 9, 10
+]
+ 
+*/
+/* task new for getting only number elements DECLARATIVE WAY */
+
+
+let combArray1=[1,2,3,true,undefined,4,false,6,7,'',8,'text',9,10]
+
+const filterArr= combArray1.filter((v)=> typeof v === 'number')
+
+console.log(filterArr);
+/* 
+[
+  1, 2, 3,  4, 6,
+  7, 8, 9, 10
+]
+
+*/
