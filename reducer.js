@@ -169,3 +169,11 @@ const compose = (...fun)=>{
 }
 const takeres= compose(add,multy,dive)(n)
 console.log(takeres)
+
+
+// after the arrobj.js
+// see the link https://www.programiz.com/javascript/library/array/reduce
+
+
+
+
