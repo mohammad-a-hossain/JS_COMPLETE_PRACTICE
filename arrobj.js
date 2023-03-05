@@ -580,7 +580,165 @@ note: in sequence of data operation (when data must be serial ) time it need arr
 
 
 
-//  REDUCE USE CASE ---> added to reducer.js and see the rest work
+//  REDUCE USE CASE ---> added to reducer.js and see the rest work-----------------------
+
+// reduce breaking and implement of row reduce 
+   
+ // first implement own reducer 
 
 
+
+
+
+
+//it is a pattern of reduce
+
+/*  
+
+function myReducer(array,cb,init){
+     let acc =init 
+     
+     for(let i=0; i < array.length; i++){
+       acc= cb(acc, array[i],i , array)
+     }
+
+     return acc 
+  }
+
+  let filtNum = [1,2,3,'',false, 5, NaN,7, 'str',10]
+
+   const getREs= myReducer(
+
+    filtNum ,(acc,curr)=>{
+      if(curr){
+        acc.push(curr)
+      }
+      return acc
+    },[]
+   ) 
+
+
+   console.log(getREs);
+
+  
+ 
+[
+  1,  2, 3,
+  5,  7, 'str',
+  10
+]
+ 
+ const doSum =myReducer([3,4,5,6],(a , b)=>{
+  acc= a+b 
+  return acc
+ },0)
+
+ console.log(doSum); // 18 
+ 
+ 
+ */
+
+
+
+
+
+
+
+
+const aNum =[1,2,'',5,false,NaN,10]
+/*
+const res= aNum.reduce((acc,curr,index)=>{
+  if(curr){ // if curr is truthy value then it will bring only truthy value
+    acc += curr.toString()+(index < aNum.length-1 ? '-':'')
+  }
+  return acc 
+},'')
+
+
+*/
+//console.log(res);
+/* 1-2-5-10 */
+
+const res1=aNum.reduce((acc,curr,index)=>{
+
+console.log('index :',index, 'cur :',curr, 'acc :', acc );
+
+     if(curr){ // when curr is true value / number then it push number to acc[]
+      acc.push(curr.toString()) // if we want to print only num value we push by condition if(curr)
+     }
+
+  return acc 
+},[])
+console.log(res1); // it filter an map done in one reduce case
+
+/*
+index : 0 cur : 1 acc : []
+index : 1 cur : 2 acc : [ '1' ]
+index : 2 cur :  acc : [ '1', '2' ]
+index : 3 cur : 5 acc : [ '1', '2' ]
+index : 4 cur : false acc : [ '1', '2', '5' ]
+index : 5 cur : NaN acc : [ '1', '2', '5' ]
+index : 6 cur : 10 acc : [ '1', '2', '5' ]
+
+
+[ '1', '2', '5', '10' ] //after filete it also map the whole number and get result
+
+ */
+
+/* 
+ if we want to print all data as it was  so we can only push curr
+
+const ano= aNum.reduce((acc,curr)=>{
+     acc.push(curr)
+   return acc
+},[])
+console.log(ano);
+[
+  1,  2,     '',
+  5,  false, NaN,
+  10
+] */
+
+
+
+// NOW WE WILL SEE THE TIME CONSUME IN REDUCER --------------------
+
+
+const prr =[]
+for(let i=0; i < 5000000 ; i++){
+  prr.push(i)
+}
+
+// now we will operate 2 method filter and map and calculate time 
+
+console.time('map-filter');
+  const ress = prr.filter((item) => item % 2 === 0).map((item) => item *2)
+
+console.timeEnd('map-filter') 
+/* 
+map-filter: 181.333ms time consume 
+*/
+
+
+// now we will compare with reduc method to do same operation 
+
+console.time('reduce-time')
+
+prr.reduce((acc,curr)=>{
+
+    if(curr % 2 === 0){
+      acc.push(curr * 2)
+    }
+
+  return acc 
+},[])
+
+console.timeEnd('reduce-time')
+/* 
+
+map-filter: 305.831ms
+
+reduce-time: 174.14ms
+
+*/
 

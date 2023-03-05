@@ -263,3 +263,173 @@ console.log([1, 2] + [3, 4]);
 3: SyntaxError
 4: 1,23,4 */
 
+
+//20. What is the output of below code
+const numbers = new Set([1, 1, 2, 3, 4]);
+console.log(numbers);
+
+const browser = new Set("Firefox");
+console.log(browser);
+/* 1: {1, 2, 3, 4}, {"F", "i", "r", "e", "f", "o", "x"}
+2: {1, 2, 3, 4}, {"F", "i", "r", "e", "o", "x"}
+3: [1, 2, 3, 4], ["F", "i", "r", "e", "o", "x"]
+4: {1, 1, 2, 3, 4}, {"F", "i", "r", "e", "f", "o", "x"} */
+
+//extra
+
+/* let aData= [1,1,4,5,4,3,2,6,7,8]
+const neData= new Set(aData)
+console.log(neData); */
+
+
+//21. What is the output of below code
+console.log(NaN === NaN);
+/* 1: True
+2: False */
+
+
+//22. What is the output of below code
+let numbes = [1, 2, 3, 4, NaN];
+console.log(numbes.indexOf(NaN));
+/* 1: 4
+2: NaN
+3: SyntaxError
+4: -1 */
+
+/* 
+The indexOf uses strict equality operator(===) internally
+ and NaN === NaN evaluates to false. Since indexOf won't
+  be able to find NaN inside an array,
+   it returns -1 always. But you can use 
+   Array.prototype.findIndex method to find out the index of NaN 
+   in an array or You can use Array.prototype.includes
+   to check if NaN is present in an array or not.
+
+let numbers = [1, 2, 3, 4, NaN];
+console.log(numbers.findIndex(Number.isNaN)); // 4
+
+console.log(numbers.includes(NaN)); // true
+
+*/
+
+
+//23. What is the output of below code
+//let [a, ...b,] = [1, 2, 3, 4, 5];
+//console.log(a, b);
+/* 1: 1, [2, 3, 4, 5]
+2: 1, {2, 3, 4, 5}
+3: SyntaxError
+4: 1, [2, 3, 4]
+Answer */
+/* 
+
+When using rest parameters, trailing commas are not allowed and 
+will throw a SyntaxError. If you remove the trailing comma then 
+it displays 1st answer
+
+let [a, ...b] = [1, 2, 3, 4, 5];
+
+console.log(a, b); // 1, [2, 3, 4, 5]
+
+*/
+
+//25. What is the output of below code
+async function func() {
+  return 10;
+}
+console.log(func());
+/* 1: Promise {<fulfilled>: 10}
+2: 10
+3: SyntaxError
+4: Promise {<rejected>: 10} */
+
+
+
+//28. What is the output of below code
+function delay() {
+  return new Promise((resolve) => setTimeout(resolve, 2000));
+}
+
+async function delayedLog(item) {
+  await delay();
+  console.log(item);
+}
+
+async function process(array) {
+  array.forEach(async (item) => {
+    await delayedLog(item);
+  });
+  console.log("Process completed!");
+}
+process([1, 2, 3, 5]);
+
+//: Process completed! and 1 2 3 5
+
+
+
+//29. What is the output of below code
+var set = new Set();
+set.add("+0").add("-0").add(NaN).add(undefined).add(NaN);
+console.log(set);
+/* 1: Set(4) {"+0", "-0", NaN, undefined}
+2: Set(3) {"+0", NaN, undefined}
+3: Set(5) {"+0", "-0", NaN, undefined, NaN}
+4: Set(4) {"+0", NaN, undefined, NaN} */
+
+
+
+//30. What is the output of below code
+const sym1 = Symbol("one");
+const sym2 = Symbol("one");
+
+const sym3 = Symbol.for("two");
+const sym4 = Symbol.for("two");
+
+console.log(sym1 === sym2, sym3 === sym4);
+
+/* 1: true, true
+2: true, false
+3: false, true
+4: false, false
+
+Symbol.for() function creates a symbol in a global symbol registry list.
+ But it doesn't necessarily create a new symbol on every call,
+  it checks first if a symbol with the given key is already present in the registry and returns the symbol if it is found. Otherwise a new symbol created in the registry.
+Note: The symbol description is just useful for debugging purposes.
+
+
+*/
+
+//32.What is the output of below code
+let myNumber = 100;
+let myString = "100";
+
+if (!typeof myNumber === "string") {
+  console.log("It is not a string!");
+} else {
+  console.log("It is a string!");
+}
+
+if (!typeof myString === "number") {
+  console.log("It is not a number!");
+} else {
+  console.log("It is a number!");
+}
+/* 1: SyntaxError
+2: It is not a string!, It is not a number!
+3: It is not a string!, It is a number!
+4: It is a string!, It is a number! */
+
+/* The return value of typeof myNumber or typeof myString is always a
+ truthy value (either "number" or "string"). The ! operator operates on either
+ typeof myNumber or typeof myString, converting them to boolean values.
+  Since the value of both !typeof myNumber and !typeof myString is false, 
+  the if condition fails, and control goes to else block. 
+  To make the ! operator operate on the equality expression, one needs to add parentheses:
+
+if (!(typeof myNumber === "string"))
+Or simply use the inequality operator:
+
+if (typeof myNumber !== "string")
+  */
+ 
