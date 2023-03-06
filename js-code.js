@@ -433,3 +433,201 @@ Or simply use the inequality operator:
 if (typeof myNumber !== "string")
   */
  
+//34. What is the output of below code
+class A {
+  constructor() {
+    console.log(new.target.name);
+  }
+}
+
+class B extends A {
+  constructor() {
+    super();
+  }
+}
+
+new A();
+new B();
+// A B 
+
+
+
+//35. What is the output of below code
+//const [x, ...y, z] = [1, 2, 3, 4];
+//console.log(x, y, z);
+/* 1: 1, [2, 3], 4
+2: 1, [2, 3, 4], undefined
+3: 1, [2], 3
+4: SyntaxError */
+
+
+/* 
+const [x,y, z] = [1, 2, 3, 4];
+console.log(x, y, z);
+VM49:2 1 2 3
+ */
+
+
+
+// 37. What is the output of below code
+function area({ length = 10, width = 20 }) {
+  console.log(length * width);
+}
+
+
+/* 
+If you leave out the right-hand side assignment for the 
+destructuring object, the function will look for at least
+ one argument to be supplied when invoked. Otherwise you will
+  receive an error Error: Cannot read property 'length' of 
+  undefined as mentioned above.
+
+*/
+area(); //error 
+
+function area({ length = 10, width = 20 }) {
+  console.log(length * width);
+}
+
+area({});
+
+function area({ length = 10, width = 20 } = {}) {
+  console.log(length * width);
+}
+
+area();
+
+
+//38. What is the output of below code
+const props = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Jack" },
+  { id: 3, name: "Tom" },
+];
+
+const [, , { name }] = props;
+console.log(name);
+
+// Tom 
+
+
+
+
+
+
+//39. What is the output of below code
+function checkType(num = 1) {
+  console.log(typeof num);
+}
+
+/* checkType();
+checkType(undefined);
+checkType("");
+checkType(null);
+ */
+/* 1: number, undefined, string, object
+2: undefined, undefined, string, object
+
+3: number, number, string, object
+
+4: number, number, number, number */
+
+
+
+//40. What is the output of below code
+function add(item, items = []) {
+  items.push(item);
+  return items;
+}
+
+/* console.log(add("Orange"));
+console.log(add("Apple")); */
+
+
+
+
+//41. What is the output of below code
+function greet(greeting, name, message = greeting + " " + name) {
+  console.log([greeting, name, message]);
+}
+
+greet("Hello", "John");
+greet("Hello", "John", "Good morning!");
+
+
+
+//42. What is the output of below code
+function outer(f = inner()) {
+  function inner() {
+    return "Inner";
+  }
+}
+outer();
+
+/* 1: ReferenceError
+2: Inner
+Answer
+Answer: 1
+The functions and variables declared in the function body
+cannot be referred from default value parameter initializers. 
+If you still try to access, it throws a run-time
+ReferenceError(i.e, inner is not defined). */
+
+
+
+
+//43. What is the output of below code
+function myFun(x, y, ...manyMoreArgs) {
+  console.log(manyMoreArgs);
+}
+
+myFun(1, 2, 3, 4, 5);
+myFun(1, 2);
+/* 1: [3, 4, 5], undefined
+2: SyntaxError
+3: [3, 4, 5], []
+4: [3, 4, 5], [undefined] */
+
+
+
+
+//44. What is the output of below code
+/* 
+const obj = { key: "value" };
+const array = [...obj];
+console.log(array);
+*/
+/* 1: ['key', 'value']
+2: TypeError
+3: []
+4: ['key']
+Answer */
+
+// Answer: 2
+/* Spread syntax can be applied only to iterable objects. 
+By default, Objects are not iterable, but they 
+become iterable when used in an Array, or
+ with iterating functions such 
+ as map(), reduce(), and assign(). 
+ If you still try to do it, it still throws TypeError: obj is not iterable. */
+
+
+
+ //45. What is the output of below code
+
+function* myGenFunc() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+var myGenObj = new myGenFunc();
+console.log(myGenObj.next().value);
+
+/* 1: 1
+2: undefined
+3: SyntaxError
+4: TypeError
+Answer 3
+ */
+
+

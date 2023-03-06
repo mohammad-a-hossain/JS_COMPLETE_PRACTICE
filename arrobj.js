@@ -734,6 +734,7 @@ prr.reduce((acc,curr)=>{
 },[])
 
 console.timeEnd('reduce-time')
+  
 /* 
 
 map-filter: 305.831ms
@@ -742,3 +743,153 @@ reduce-time: 174.14ms
 
 */
 
+
+
+const axios = require('axios')
+const url ='https://jsonplaceholder.typicode.com/posts' 
+
+/* 
+async function getData(){
+  const {data} =  await axios.get(url)
+//console.log(data);
+ const result = data.slice(0,10).map((item)=>{
+  return {
+  
+    id:item.id,
+    title:item.title
+   }
+ })
+ return result
+} 
+*/
+//getData().then((data) => console.log(data)).catch((e)=>console.log(e))
+/* 
+[
+  {
+    id: 1,
+    title: 'sunt aut facere repellat provident occaecati excepturi optio reprehe n
+derit'
+  },
+  { id: 2, title: 'qui est esse' },
+  {
+    id: 3,
+    title: 'ea molestias quasi exercitationem repellat qui ipsa sit aut'
+  },
+  { id: 4, title: 'eum et est occaecati' },
+  { id: 5, title: 'nesciunt quas odio' },
+  { id: 6, title: 'dolorem eum magni eos aperiam quia' },
+  { id: 7, title: 'magnam facilis autem' },
+  { id: 8, title: 'dolorem dolore est ipsam' },
+  {
+    id: 9,
+    title: 'nesciunt iure omnis dolorem tempora et accusantium'
+  },
+  { id: 10, title: 'optio molestias id quia eum' }
+]
+*/
+
+// using reducer ------------------------------------------------------
+async function getData(){
+  const {data} =  await axios.get(url)
+
+  const result = data.slice(0,10).reduce((acc,curr) =>{
+        
+    acc[curr.id] = {...curr}
+    delete acc[curr.id].body
+    return acc
+  },{})
+
+ return result
+} 
+getData().then((data) => console.log(data)).catch((e)=>console.log(e))
+
+getData()
+
+/* 
+{
+  '1': {
+    userId: 1,
+    id: 1,
+    title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit'
+  },
+  '2': { userId: 1, id: 2, title: 'qui est esse' },
+  '3': {
+    userId: 1,
+    id: 3,
+    title: 'ea molestias quasi exercitationem repellat qui ipsa sit aut'
+  },
+  '4': { userId: 1, id: 4, title: 'eum et est occaecati' },
+  '5': { userId: 1, id: 5, title: 'nesciunt quas odio' },
+  '6': { userId: 1, id: 6, title: 'dolorem eum magni eos aperiam quia' },        
+  '7': { userId: 1, id: 7, title: 'magnam facilis autem' },
+  '8': { userId: 1, id: 8, title: 'dolorem dolore est ipsam' },
+  '9': {
+    userId: 1,
+    id: 9,
+    title: 'nesciunt iure omnis dolorem tempora et accusantium'
+  },
+  '10': { userId: 1, id: 10, title: 'optio molestias id quia eum' }
+}
+
+*/
+
+
+let names=[
+  'mango',
+  'apple',
+  'banana',
+  'jamborea',
+  'oragne',
+  'dolorem',
+  'accusantium'
+]
+
+const getNames = names.reduce((acc,curr)=>{
+    const firstLett= curr[0].toUpperCase()
+    if(firstLett in acc){
+      acc[firstLett].push( curr)
+    }else{
+   acc[firstLett] =[curr]
+    }
+ 
+   return acc
+},{})
+
+console.log(getNames);
+/* 
+{
+  M: [ 'mango' ],
+  A: [ 'apple', 'accusantium' ],
+  B: [ 'banana' ],
+  J: [ 'jamborea' ],
+  O: [ 'oragne' ],
+  D: [ 'dolorem' ]
+}
+*/
+
+Object.keys(getNames).forEach((gkey)=>{
+  console.log('-----',gkey,'------');
+    getNames[gkey].forEach(nam => console.log(nam))
+    console.log('');
+})
+
+/* 
+----- M ------
+mango
+
+----- A ------
+apple
+accusantium
+
+----- B ------
+banana
+
+----- J ------
+jamborea
+
+----- O ------
+oragne
+
+----- D ------
+dolorem
+*/
