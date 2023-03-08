@@ -557,12 +557,12 @@ greet("Hello", "John", "Good morning!");
 
 
 //42. What is the output of below code
-function outer(f = inner()) {
+/* function outer(f = inner()) {
   function inner() {
     return "Inner";
   }
 }
-outer();
+outer(); */
 
 /* 1: ReferenceError
 2: Inner
@@ -615,13 +615,13 @@ become iterable when used in an Array, or
 
  //45. What is the output of below code
 
-function* myGenFunc() {
+/* function* myGenFunc() {
   yield 1;
   yield 2;
   yield 3;
 }
 var myGenObj = new myGenFunc();
-console.log(myGenObj.next().value);
+console.log(myGenObj.next().value); */
 
 /* 1: 1
 2: undefined
@@ -631,3 +631,508 @@ Answer 3
  */
 
 
+//47. What is the output of below code
+const myGenerator = (function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+})();
+for (const value of myGenerator) {
+  console.log(value);
+  break;
+}
+
+for (const value of myGenerator) {
+  console.log(value);
+}
+/* 1: 1,2,3 and 1,2,3
+2: 1,2,3 and 4,5,6
+3: 1 and 1
+4: 1 */
+
+
+//48. What is the output of below code
+
+//const num = 0o38;
+//console.log(num);
+
+/* 1: SyntaxError
+2: 38
+Answer
+Answer: 1
+If you use an invalid number(outside of 0-7 range) 
+in the octal literal, JavaScript will throw a SyntaxError. 
+In ES5, it treats the octal literal as a decimal number. */
+
+
+//49. What is the output of below code
+/* const squareObj = new Square(10);
+console.log(squareObj.area);
+
+class Square {
+  constructor(length) {
+    this.length = length;
+  }
+
+  get area() {
+    return this.length * this.length;
+  }
+
+  set area(value) {
+    this.area = value;
+  }
+} */
+/* 1: 100
+2: ReferenceError */
+
+
+
+//50. What is the output of below code
+function Person() {}
+
+Person.prototype.walk = function () {
+  return this;
+};
+
+Person.run = function () {
+  return this;
+};
+
+let user = new Person();
+let walk = user.walk;
+console.log(walk());
+
+let run = Person.run;
+console.log(run());
+
+/* 1: undefined, undefined
+2: Person, Person
+3: SyntaxError
+4: Window, Window
+Answer
+Answer: 4
+When a regular or prototype method is called without a value 
+for this, the methods return an initial this value if the value
+ is not undefined. Otherwise global window object will be returned.
+  In our case, the initial this value is undefined so both methods 
+  return window objects.
+ */
+
+
+
+
+  //51. What is the output of below code
+class Vehicles {
+  constructor(name) {
+    this.name = name;
+  }
+
+  start() {
+    console.log(`${this.name} vehicle started`);
+  }
+}
+
+class Carr extends Vehicles {
+  start() {
+    console.log(`${this.name} car started`);
+    super.start();
+  }
+}
+
+const carr = new Carr("BMW");
+console.log(carr.start());
+/* 1: SyntaxError
+2: BMW vehicle started, BMW car started
+3: BMW car started, BMW vehicle started
+4: BMW car started, BMW car started
+Answer
+Answer: 3
+The super keyword is used to call methods of a superclass.
+ Unlike other languages the super invocation doesn't need to 
+ be a first statement. i.e, The statements will be executed 
+ in the same order of code. */
+
+
+
+ //54. What is the output of below code?
+ console.log(typeof typeof typeof true);
+/*  1: string
+ 2: boolean
+ 3: NaN
+ 4: number
+ Answer
+ Answer: 1
+ The typeof operator on any primitive returns a string value.
+  So even if you apply the chain of typeof operators on the 
+  return value, it is always string. */
+ 
+ 
+
+
+
+
+//55. What is the output of below code?
+let zero = new Number(0);
+
+if (zero) {
+  console.log("If");
+} else {
+  console.log("Else");
+}
+/* 1: If
+2: Else
+3: NaN
+4: SyntaxError
+Answer
+Answer: 1
+The type of operator on new Number always returns object. i.e, 
+typeof new Number(0) --> object.
+Objects are always truthy in if block
+Hence the above code block always goes to if section. */
+
+
+
+
+
+
+//55. What is the output of below code in non strict mode?
+let msg = "Good morning!!";
+
+msg.name = "John";
+
+console.log(msg.name);
+/* 1: ""
+2: Error
+3: John
+4: Undefined
+Answer
+Answer: 4
+It returns undefined for non-strict mode and returns Error for 
+strict mode. In non-strict mode, the wrapper object is going to
+ be created and get the mentioned property. But the object get
+  disappeared after accessing the property in next line. */
+
+
+
+
+  //57. What is the output of below code ?
+/* 1: console.log(true && 'hi');
+2: console.log(true && 'hi' && 1);
+3: console.log(true && '' && 0); */
+/* Answer
+1: hi
+2: 1
+3: ''
+Reason : The operator returns the value of the first falsy operand 
+encountered when evaluating from left to right, or the value of
+ the last operand if they are all truthy.
+
+Note: Below these values are consider as falsy value
+ */
+/* 1: 0
+2: ''
+3: null
+4: undefined
+5: NAN */
+
+
+
+//58. What is the output of below code ?
+let arr = [1, 2, 3];
+let str = "1,2,3";
+
+console.log(arr == str);
+/* 1: false
+2: Error
+3: true
+Answer
+Answer: 3
+Arrays have their own implementation of toString method that
+ returns a comma-separated list of elements. So the above code 
+ snippet returns true. In order to avoid conversion of array type,
+  we should use === for comparison.
+
+ */
+
+
+ // 60. What is the output of below code?
+let quickPromise = Promise.resolve();
+
+quickPromise.then(() => console.log("promise finished"));
+
+console.log("program finished"); 
+/* 1: program finished
+2: Cannot predict the order
+3: program finished, promise finished
+4: promise finished, program finished */
+
+
+
+
+
+
+//61. What is the output of below code?
+console.log('First line')
+['a', 'b', 'c'].forEach((element) => console.log(element))
+console.log('Third line')
+/* 1: First line, then print a, b, c in a new line, and finally print Third line as next line
+2: First line, then print a, b, c in a first line, and print Third line as next line
+3: Missing semi-colon error
+4: Cannot read properties of undefined
+Answer
+Answer: 4
+When JavaScript encounters a line break without a semicolon, 
+the JavaScript parser will automatically add a semicolon based 
+on a set of rules called Automatic Semicolon Insertion which
+ determines whether line break as end of statement or not to 
+ insert semicolon. But it does not assume a semicolon before
+  square brackets [...]. So the first two lines considered as a single
+ statement as below. */
+
+
+
+ //64. What is the output of below code?
+const numberss = [11, 25, 31, 23, 33, 18, 200];
+numbers.sort();
+console.log(numberss);
+/* 1: [11, 18, 23, 25, 31, 33, 200]
+2: [11, 18, 200, 23, 25, 31, 33]
+3: [11, 25, 31, 23, 33, 18, 200]
+4: Cannot sort numbers
+Answer
+Answer: 2
+By default, the sort method sorts elements alphabetically. 
+This is because elemented converted to strings and strings 
+compared in UTF-16 code units order. Hence, you will see the
+ above numbers not sorted as expected. In order to sort numerically 
+ just supply a comparator function which handles 
+numeric sorts. */
+
+const numbersss = [11, 25, 31, 23, 33, 18, 200];
+numbers.sort((a, b) => a - b);
+console.log(numbers);
+
+
+
+
+//66. What is the output of below code?
+/* console.log(name);
+console.log(message());
+var name = 'John';
+(function message() {
+   console.log('Hello John: Welcome');
+}); */
+/* 1: John, Hello John: Welcome
+2: undefined, Hello John, Welcome
+3: Reference error: name is not defined, Reference error: message is not defined
+4: undefined, Reference error: message is not defined
+Answer
+Answer: 4
+IIFE(Immediately Invoked Function Expression) is
+ just like any other function expression which won't 
+ be hoisted. Hence, there will be a reference error 
+ for message call. The behavior would be the same with below function 
+expression of message1, */
+
+
+
+
+//68. What is the output of below code?
+var currentCity = "NewYork";
+
+var changeCurrentCity = function() {
+  console.log('Current City:', currentCity);
+  var currentCity = "Singapore";
+  console.log('Current City:', currentCity);
+}
+
+changeCurrentCity();
+/* 1: NewYork, Singapore
+2: NewYork, NewYork
+3: undefined, Singapore
+4: Singapore, Singapore
+Answer
+Answer: 3
+Due to hositing feature, the variables declared 
+with var will have undefined value in the creation 
+phase so the outer variable currentCity will get same 
+undefined value. But after few lines of code JavaScript 
+engine found a new function call(changeCurrentCity())
+ to update the current city with var re-declaration. 
+ Since each function call will create a new execution 
+ context, the same variable will have undefined value
+  before the declaration and new value(Singapore) after
+   the declarion. Hence, the value undefined print first
+    followed by new value 
+Singapore in the execution phase. */
+
+
+
+
+//69. What is the output of below code in an order?
+function second() {
+	var message;
+  console.log(message);
+}
+
+function first() {
+	var message="first";
+  second();
+  console.log(message);
+}
+
+var message = "default";
+first();
+console.log(message);
+
+/* 1: undefined, first, default
+2: default, default, default
+3: first, first, default
+4: undefined, undefined, undefined
+Answer
+Answer: 1
+Each context(global or functional) has it's own variabl
+ environment and the callstack of variables in a LIFO order.
+  So you can see the message variable value from second, 
+  first functions in an order followed by global context 
+  message variable value at the end. */
+
+
+
+
+
+
+  //71. What is the output of below code?
+/* const user = {
+  name: 'John',
+  eat() {
+    console.log(this);
+    var eatFruit = function() {
+      console.log(this);
+    }
+    eatFruit()
+  }
+}
+user.eat(); */
+/* 1: {name: "John", eat: f}, {name: "John", eat: f}
+2: Window {...}, Window {...}
+3: {name: "John", eat: f}, undefined
+4: {name: "John", eat: f}, Window {...}
+Answer
+Answer: 4
+this keyword is dynamic scoped but not lexically scoped . 
+In other words, it doesn't matter where this has been written
+ but how it has been invoked really matter. In the above code
+  snippet, the user object invokes eat function so this keyword
+   refers to user object but eatFruit has been invoked by eat 
+   function and this will have default Window object.
+
+The above pit fall fixed by three ways,
+
+In ES6, the arrow function will make this keyword as
+ lexically scoped. Since the surrounding object of this
+  object is user object, the eatFruit function will contain
+   user object for this object. */
+/* const user = {
+  name: 'John',
+  eat() {
+    console.log(this);
+    var eatFruit = () => {
+      console.log(this);
+    }
+    eatFruit()
+  }
+} */
+/* user.eat();
+The next two solutions have been used before ES6 introduced.
+
+It is possible create a reference of this into a separate variable and use that new variable inplace of this keyword inside eatFruit function. This is a common practice in jQuery and AngularJS before ES6 introduced.
+const user = {
+  name: 'John',
+  eat() {
+    console.log(this);
+    var self = this;
+    var eatFruit = () => {
+      console.log(self);
+    }
+    eatFruit()
+  }
+} */
+/* user.eat();
+The eatFruit function can bind explicitly with this keyword where it refers Window object.
+const user = {
+  name: 'John',
+  eat() {
+    console.log(this);
+    var eatFruit = function() {
+      console.log(this);
+    }
+    return eatFruit.bind(this)
+  }
+}
+user.eat()();
+ */
+
+
+
+
+//77. What is the output of below code?
+const promiseOne = new Promise((resolve, reject) => setTimeout(resolve, 4000));
+const promiseTwo = new Promise((resolve, reject) => setTimeout(reject, 4000));
+
+Promise.all([promiseOne, promiseTwo]).then(data => console.log(data));
+/* 1: [{status: "fullfilled", value: undefined}, {status: "rejected", reason: undefined}]
+2: [{status: "fullfilled", value: undefined}, Uncaught(in promise)]
+3: Uncaught (in promise)
+4: [Uncaught(in promise), Uncaught(in promise)]
+Answer
+Answer: 2 */
+/* The above promises settled at the same time but one of them 
+resolved and other one rejected. When you use .all method on 
+these promises, the result will be short circuted by throwing
+ an error due to rejection in second promise. But If you use 
+ .allSettled method then result of both the promises will be
+  returned irrespective of resolved or rejected promise status 
+  without throwing any error.
+ */
+Promise.allSettled([promiseOne, promiseTwo]).then(data => console.log(data));
+
+
+
+
+
+//78. What is the output of below code?
+try {
+  setTimeout(() => {
+    console.log('try block');
+    throw new Error(`An exception is thrown`)
+  }, 1000);
+} catch(err) {
+  console.log('Error: ', err);
+}
+/* 1: try block, Error: An exception is thrown
+2: Error: An exception is thrown
+3: try block, Uncaught Error: Exception is thrown
+4: Uncaught Error: Exception is thrown
+Answer
+Answer: 3
+If you put setTimeout and setInterval methods inside the
+ try clause and an exception is thrown, the catch clause
+ will not catch any of them. This is because the try...catch 
+ statement works synchronously, and the function in the above
+  code is executed asynchronously after a certain period of time.
+  Hence, you will see runtime exception without catching the error. 
+  To resolve this issue, you have to put the try...catch block 
+  inside the function as below, */
+
+setTimeout(() => {
+   try {
+      console.log('try block');
+      throw new Error(`An exception is thrown`)
+   } catch(err) {
+      console.log('Error: ', err);
+   }
+  
+  }, 1000);
+/* You can use .catch() function in promises to 
+avoid these issues with asynchronous code. */

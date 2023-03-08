@@ -174,6 +174,13 @@ console.log(takeres)
 // after the arrobj.js
 // see the link https://www.programiz.com/javascript/library/array/reduce
 
+// understand reduce by mojila
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+
+//https://betterprogramming.pub/6-use-cases-for-reduce-in-javascript-49683842ebed
 
 
 
+/* const names = ["Mike","Matt","Nancy","Adam","Jenny","Nancy","Carl"];  
+let chkDup= [...new Set(names)]
+console.log(chkDup); */
