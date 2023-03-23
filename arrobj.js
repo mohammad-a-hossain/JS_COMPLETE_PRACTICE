@@ -788,8 +788,11 @@ derit'
 ]
 */
 
+
+
+
 // using reducer ------------------------------------------------------
-async function getData(){
+/* async function getData(){
   const {data} =  await axios.get(url)
 
   const result = data.slice(0,10).reduce((acc,curr) =>{
@@ -803,7 +806,7 @@ async function getData(){
 } 
 getData().then((data) => console.log(data)).catch((e)=>console.log(e))
 
-getData()
+getData() */
 
 /* 
 {
@@ -893,3 +896,65 @@ oragne
 ----- D ------
 dolorem
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+const nativeLand=['i','love','my','country','she','is','so','beautifull']
+
+/* function reducer(accumulator, currentValue, index) {
+  const returns = accumulator + currentValue;
+  console.log(
+    `accumulator: ${accumulator}, currentValue: ${currentValue}, index: ${index}, returns: ${returns}`,
+  );
+  return returns;
+}
+
+nativeLand.reduce(reducer); */
+
+/* const respon =nativeLand.reduce((acc,curr,index)=>{
+
+  console.log('index :',index, 'cur :',curr, 'acc :', acc );
+  
+       if(curr){ // when curr is true value / number then it push number to acc[]
+        acc.push(curr.toString()) // if we want to print only num value we push by condition if(curr)
+       }
+  
+    return acc 
+  },[])
+  console.log(respon);  */
+
+
+/*
+  const array = [5, 6, 7, 8, 9];
+ 
+function reducer(accumulator, currentValue, index) {
+  const returns = accumulator + currentValue;
+  console.log(
+    `accumulator: ${accumulator}, currentValue: ${currentValue}, index: ${index}, returns: ${returns}`,
+  );
+  return returns;
+}
+
+array.reduce(reducer);  */
+
+/* const prices=[33,44,55,66,77,88]
+
+const sums = prices.reduce((preVal, currVal, currentIndex, prices) => {
+  console.log(
+    `accumulator: ${preVal}, currentValue: ${currVal}, index: ${currentIndex}, returns: ${preVal}`,
+  );
+
+  return preVal + currVal;
+ }, 0); */
+ 
+  

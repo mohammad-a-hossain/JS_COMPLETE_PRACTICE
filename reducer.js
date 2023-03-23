@@ -171,6 +171,322 @@ const takeres= compose(add,multy,dive)(n)
 console.log(takeres)
 
 
+
+const amazaon=['b an g la de ash'].reduce
+
+
+
+
+const about= [3,4,5,6,7]
+
+const newa1= about.reduce((acc,curr,index)=>{
+    console.log(index,acc,curr)
+    return acc + curr
+})
+console.log("--------------------------");
+const newa= about.reduce((acc,curr,index)=>{
+    console.log(index,acc,curr)
+    return acc + curr
+},5)
+
+
+
+/*---------------------------------- flat array--------------------------------- */
+
+const flatarr= ['text',[3,'south'],[33,55],['bang'],false]
+
+   const flatRes= flatarr.flat()
+ //console.log(flatRes);
+ //[ 'text', 3, 'south', 33, 55, 'bang', false ]
+
+
+  /* using reducer */
+  const redFlat = flatarr.reduce((acc,curr)=>{
+
+    return acc.concat(curr)
+
+
+  },[])
+
+console.log(redFlat);
+//[ 'text', 3, 'south', 33, 55, 'bang', false ]
+
+
+
+
+
+/* ------------------------------Frequency checker ---------------------------------- */
+
+
+var arrstr = ["a", "b", "c", "d", "e", "f", "g","a","c", "h", "i", "j", "k", "l", "m", "n"];
+
+const arrstrr = 'bangladesh i love your'
+function getFrequency(string) {
+    var freq = {};
+    for (var i=0; i<string.length;i++) {
+        var character = string.charAt(i);
+        if (freq[character]) {
+           freq[character]++;
+        } else {
+           freq[character] = 1;
+        }
+    }
+
+    return freq;
+};
+
+
+console.log(getFrequency(arrstrr));
+
+
+/*------------ useing reducere -----------*/
+
+ const redFreq= arrstr.reduce((acc,curr)=>{
+    if(acc[curr]){
+        acc[curr] ++
+    }else{
+        acc[curr] =1
+    }
+
+    return acc
+ },{})
+
+ console.log(redFreq);
+
+//  {
+//     a: 2,
+//     b: 1,
+//     c: 2,
+//     d: 1,
+//     e: 1,
+//     f: 1,
+//     g: 1,
+//     h: 1,
+//     i: 1,
+//     j: 1,
+//     k: 1,
+//     l: 1,
+//     m: 1,
+//     n: 1
+//   }
+
+
+
+
+function myReduce(arr,logic,init){
+        let acc = init
+        let start= 0
+        if(!init){
+            acc= arr[0]
+            start=1
+        }
+        for(let i=start ; i <arr.length; i++){
+            acc= logic(acc,arr[i],i,arr)
+        }
+      return acc
+}
+
+const arr = [1,2,3,4,5]
+ const sam= myReduce(arr,(acc,curr)=>{
+   return acc + curr
+ },0)
+
+console.log(sam);
+
+
+
+/* -------------flat map--------------- */
+
+const stMap= [1,2,3,4,5]
+
+    // const fltMpa= stMap.flatMap((x)=>[x * 3])
+     //console.log(fltMpa);
+
+    // [ 3, 6, 9, 12, 15 ]
+
+// using reducer---
+
+     const fltMpa= stMap.reduce((acc,curr)=>{
+         return  acc.concat(curr * 3)
+     },[])
+
+ console.log(fltMpa); //[ 3, 6, 9, 12, 15 ]
+
+
+
+
+/* ----------INSTEAD OF MAP() AND FILTER()-------------- */
+
+ const nmbs= [2,3,4,5,6]
+
+   //map by reduce
+   const resMap = nmbs.reduce((acc,curr)=>{
+     acc.push(curr * 2)
+     return acc
+   },[])
+
+  console.log(resMap); // [ 4, 6, 8, 10, 12 ]
+ // filter by reducer
+  const filRed= nmbs.reduce((acc,curr)=>{
+    if(curr % 2 === 1){
+        acc.push(curr)
+    }
+    return acc
+  },[])
+  console.log(filRed); //[ 3, 5 ]
+
+
+  // bigdata time consume less 
+
+  const bigData =[]
+  for(let i=0; i < 1000000; i++){
+     bigData.push(i)
+  }
+
+  //chaining map and filter 
+  console.time('reduce');
+  bigData.reduce((acc,curr)=>{
+    if(curr % 2 === 1){
+        acc.push(curr * 2)
+    }
+    return acc
+  },[])
+  console.timeEnd('reduce');
+
+  console.time('mapfil')
+  bigData.map((v)=> v % 2 == 1).filter((f)=> f * 2)
+  console.timeEnd('mapfil')
+
+
+//   reduce: 30.972ms
+// mapfil: 65.363ms
+
+
+/* -------------Function compose-------------------------------------- */
+const m = 5
+const addNums= (m) => m + 10
+const multNums= (m) => m * 3
+const divNums = (m) => m/ 2
+
+
+const resx=  divNums(multNums(addNums(5))) 
+console.log(resx); //22.5
+
+// pipe function
+const pipe = (...funs) => (x) => funs.reduce((v,f)=> f(v),n) 
+const resPipe = pipe(addNums,multNums,divNums)(n)
+console.log(resPipe); //22.5
+
+
+/* ------------markup list -------------------------------------------------------- */
+
+
+const links=[
+    {name:'facebook', url:'www.faceboook.com'},
+    {name:'instagram', url:'www.instagram.com'},
+    {name:'twitter',url:'www.twitter.ocm'}
+]
+
+let templete= `<ul>{{links}}</ul>`
+
+const markuplist= links.reduce((acc,curr)=>{
+    acc += `<li><a href='${curr.url}'> ${curr.name}</a></li>`
+    return acc
+},'')
+
+templete = templete.replace('{{links}}', markuplist)
+console.log(templete);
+//
+// <ul>
+// <li><a href='www.faceboook.com'> facebook</a></li>
+// <li><a href='www.instagram.com'> instagram</a></li>
+// <li><a href='www.twitter.ocm'> twitter</a></li>
+// </ul>
+
+
+
+
+/* ---------combining data from differnt sources-------------- */
+
+const courses=[
+    {
+        id:'c1',
+        name:'computer programming',
+        title:'hello programmers',
+        price:333
+    },
+    {
+        id:'j1',
+        name:'javascritpt programming',
+        title:'hello programmers',
+        price:322
+    },
+    {
+        id:'r1',
+        name:'react programming',
+        title:'hello programmers',
+        price:444
+    },
+    {
+        id:'p1',
+        name:'pytho programming',
+        title:'hello programmers',
+        price:622
+    },
+
+]
+const discount={
+    c1: '15%',
+    j1: '20%',
+    r1:'30%'
+}
+ const updateCourseInfo= courses.reduce((acc,curr)=>{
+    if(discount[curr.id]){
+        curr.discount= discount[curr.id]
+
+    }else{
+        curr.discount= 0
+    }
+    acc.push(curr)
+    return acc
+ },[])
+
+ console.log(updateCourseInfo);
+
+//  [
+//     {
+//       id: 'c1',
+//       name: 'computer programming',
+//       title: 'hello programmers',
+//       price: 333,
+//       discount: '15%'
+//     },
+//     {
+//       id: 'j1',
+//       name: 'javascritpt programming',
+//       title: 'hello programmers',
+//       price: 322,
+//       discount: '20%'
+//     },
+//     {
+//       id: 'r1',
+//       name: 'react programming',
+//       title: 'hello programmers',
+//       price: 444,
+//       discount: '30%'
+//     },
+//     {
+//       id: 'p1',
+//       name: 'pytho programming',
+//       title: 'hello programmers',
+//       price: 622,
+//       discount: 0
+//     }
+//   ]
+ 
+
+
+
 // after the arrobj.js
 // see the link https://www.programiz.com/javascript/library/array/reduce
 
