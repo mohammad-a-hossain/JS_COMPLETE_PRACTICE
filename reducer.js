@@ -124,7 +124,7 @@ const invoice = products.reduce((acc,curr)=>{
             return acc
 },{})
 
-//console.log(invoice)
+console.log('herer',invoice)
 
 
 
@@ -484,6 +484,66 @@ const discount={
 //     }
 //   ]
  
+
+
+
+/* const nativeLand=['i','love','my','country','she','is','so','beautifull']
+
+
+const respon =nativeLand.reduce((acc,curr,index)=>{
+
+
+  console.log('index :',index, 'cur :',curr, 'acc :', acc );
+ 
+       if(curr){ // when curr is true value / number then it push number to acc[]
+        acc.push(curr.toString()) // if we want to print only num value we push by condition if(curr)
+       }
+ 
+    return acc
+  },['listen mr x '])
+  console.log(respon); */
+
+
+  /* -----removing duplicate items--------------- */
+
+
+  /* const myArray = ["a", "b", "a", "b", "c", "e", "e", "c", "d", "d", "d", "d"];
+
+  const getRemoveItem= myArray.reduce((acc,curr)=>{
+     if(!acc.includes(curr)){
+       return [...acc,curr]
+     }
+     return acc 
+  },[])
+
+  console.log(getRemoveItem);
+
+  [ 'a', 'b', 'c', 'e', 'd' ]
+
+ */
+ // var arrTostrr = ["a", "b", "c", "d", "e", "f", "g","a","c", "h", "i", "j", "k", "l", "m", "n"];
+
+
+  const arrTostrr = 'bangladesh i love your'
+  function getFrequency(string) {
+      var freq = {};
+      for (var i=0; i<string.length;i++) {
+          var character = string.charAt(i);
+          if (freq[character]) {
+             freq[character]++;
+          } else {
+             freq[character] = 1;
+          }
+      }
+  
+  
+      return freq;
+  };
+  
+  
+  
+  
+  console.log(getFrequency(arrTostrr));
 
 
 
