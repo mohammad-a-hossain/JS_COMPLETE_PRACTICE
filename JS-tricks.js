@@ -127,3 +127,62 @@ console.log(res2);
    console.log(myFun(2,4,5,7,8)) //[ 2, 4, 5, 7, 8 ]
 
    
+   // 11 . how to count duplicate item in a array ?
+
+   const listArr= ['a','c','5','d','x','a','c','3']
+
+   //useing map fun
+   function countDupl(data){
+    const count={}
+
+    data.map((d)=> {
+      count[d] = (count[d] || 0) +1
+    })
+
+    return count
+   }
+
+   console.log(countDupl(listArr));
+   //{ '3': 1, '5': 1, a: 2, c: 2, d: 1, x: 1 }
+
+
+
+
+// 12. how to reverse a word or string
+
+const str22= " i love Bangladesh"
+
+function strReverse(data){
+
+  const dataArry= data.split(' ') 
+
+  const result = dataArry.map((d) =>{
+    return d.split('').reverse().join('')
+  })
+
+  return result.join(' ')
+}
+
+console.log(strReverse(str22)); // i evol hsedalgnaB
+
+
+
+
+
+
+// 13. set word length wise ascending order
+
+const str1= 'java is not a javaScript language in programming'
+
+function strToSort(data){
+
+  const dataStrOne= data.split(" ")
+  const resultt= dataStrOne.sort((a,b)=>{
+     return  a.length - b.length
+  })
+
+  return resultt.join(" ")
+}
+
+console.log(strToSort(str1)); // a is in not java language javaScript programming
+
