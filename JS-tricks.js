@@ -186,3 +186,327 @@ function strToSort(data){
 
 console.log(strToSort(str1)); // a is in not java language javaScript programming
 
+
+//14. how to work with async and await
+
+function delay(i){
+  return new Promise((resolve) =>{
+      setTimeout(()=>{
+    resolve(i);
+    }, 1000)
+  })
+
+}
+
+async function timer(n){
+  console.log('staret time');
+
+  for(let i=0; i <=n; i++){
+   const rex= await delay(i)
+   console.log(rex);
+  }
+
+  console.log('end time');
+}
+
+timer(5)
+
+
+
+// heigher order function
+
+function hello(){
+  return function(){
+    console.log('this is heiger order function');
+  }
+}
+
+hello()()
+
+
+
+// object interview question
+
+//create an object
+
+const anyThing={
+  name:'abu',
+  age:44,
+  'i hate false':true
+}
+
+console.log(anyThing)
+// update object
+
+anyThing.name='kabu'
+console.log(anyThing);
+
+// deleting object
+delete anyThing.age 
+console.log(anyThing);
+
+// how to access property
+console.log(anyThing['i hate false']);
+delete anyThing['i hate false']
+console.log(anyThing);
+
+
+// how to print key and value in an object
+
+ const something={
+  name:'hossain',
+  age:44,
+  like:true
+ }
+
+ for(key in something){
+  console.log(key);
+ }
+//  name age like
+
+for(key in something){
+  console.log(something[key]); // value
+}
+// hossain 44 true
+
+
+//--------------------------------------------------------------------
+
+ // ** trick 1 // what is the output of the programme ?
+const obj1={
+   a:'one',
+   b:'two',
+   a:'three'
+}
+console.log(obj1); // { a: 'three', b: 'two' }
+
+// **trick2 
+// create a fun that will multiply by two all numbers property 
+const nums={
+  a:33,
+  b:333,
+  name:'sabu'
+}
+
+function numMulty(data){
+    for(key in data){
+      if(typeof data[key] === 'number'){
+        data[key] = data[key] * 2
+      }
+    }
+}
+
+numMulty(nums)
+console.log(nums); //{ a: 66, b: 666, name: 'sabu' }
+
+
+
+/** trick 3
+what is the output of the code ?
+*/
+
+const a1={}
+const b1={key:'b'}
+const c1={key:'c'}
+a1[b1]=123 
+a1[c1] = 333
+
+console.log(a1[b1]); // 333
+
+
+
+/* trick 4 
+ what is JSON.stringify and JSON.parse ? and how to set localstorage 
+*/
+
+const user1={ 
+  name:'md abu',
+  age:33,
+}
+
+console.log(user1); //{ name: 'md abu', age: 33 }
+console.log(JSON.stringify(user1));//{"name":"md abu","age":33}
+
+// now convert it back to obj
+ //console.log(JSON.parse(user1));// can not make it for direct the json
+ const resJons= JSON.stringify(user1) // need to store in a var
+
+ // now store in localStorage 
+// localStorage.setItem("locals",resJons)
+
+ console.log(JSON.parse(resJons)); //{ admin: true, name: 'sabe', age: 44 }
+
+// get the localstorage ite
+//const getObj= JSON.parse(localStorage.getItem("locals"));
+//console.log(getObj,'from loca');
+ 
+
+
+/*
+trick 5 what is the out put of the code ?
+ */
+
+console.log([...'abuhossain']); 
+/*[
+  'a', 'b', 'u', 'h',
+  'o', 's', 's', 'a',
+  'i', 'n'
+]
+*/
+
+
+
+/* trick 6
+what is the output of the code ?
+*/
+
+const user2={name:'sabe',age:44}
+const admin={admin:true, ...user2} 
+
+
+console.log(admin); // {name:'sabe',age:44, admin:true}
+
+
+
+
+/* trick 7 
+what is output of the code
+*/
+
+const setting={
+  userName:'abum asu',
+  level:44,
+  health:3
+}
+
+const data= JSON.stringify(setting,['level','health'])
+console.log(data)
+
+/*
+trick 8
+what is the out put of the code ? 
+ */
+
+const shape={
+  radius:10,
+  diameter(){
+    return this.radius * 2
+  },
+  perimeter :()=> 2 *  Math.PI * this.radius 
+}
+console.log(shape.diameter()); // 20
+console.log(shape.perimeter());//nan
+
+
+/* 
+trick 9
+what is the destruction in object ?  how to destructure of users name, fullname ?? also alias name
+*/
+
+const users={
+  name:'labu',
+  age:44,
+  fullname:{
+    first:'la',
+    last:'bu'
+  }
+}
+
+const {name, fullname:{first, last} } = users 
+console.log(first,last);
+
+/*
+trick 10
+what is the output of the code ? 
+ */
+
+ function getItems(fruitList,  favourateItems,...arg){
+  return [...fruitList, ...arg, favourateItems]
+
+ }
+getItems[['ba','nana'],'apple','mango']
+
+
+/*
+tricks 11  
+ */
+let c= {greeting:'hi'}
+let d 
+  d = c 
+
+  c.greeting='hello'
+  console.log(d.greeting); // hello
+
+  /* 
+  trick 12
+  */
+ console.log({a:1}== {a:1}); // memory ref are not same and point different memory space
+ console.log({a:1} === {a:1});
+
+/* 
+trick 13 
+*/
+let person={name:'laboni'}
+const member= [person]
+
+ person= null 
+console.log(member); // [ { name: 'laboni' } ]
+
+
+
+/* 
+trick 14
+*/
+
+const value= {number:10}
+
+const multiply = (x={...value}) =>{
+  console.log(x.number *= 2);
+}
+
+multiply() // 20
+multiply(value) //20 // value update by direct passing argument
+multiply(value)// 40 //
+multiply(value)// 80 
+
+
+/* 
+trick 15
+*/
+
+function objChange(person){
+  person.age= 100,
+ // here the person is re-assing for obj
+  person={ // here the ref is not change so this will be person2 obj
+    name:'suhel',age:44
+  }  
+
+  return person
+
+}
+const person1 = {
+  name:'kasem', age:50 // here the age is update by 100
+}
+
+const person2 = objChange(person1) // here it pass the ref of objChange fun
+
+console.log(person1);//{ name: 'kasem', age: 100 }
+console.log(person2); // { name: 'suhel', age: 44 }
+
+console.log('hr');
+/* 
+tricks 16
+what is shallow copy and deep copy ? and clone object
+*/
+const userObj = {
+  name:'abu hossain', age:44
+}
+
+// clone of obj
+const clonObj= Object.assign({}, userObj)
+//clonObj.age=400
+console.log(userObj);//{ name: 'abu hossain', age: 44 }
+console.log(clonObj,'clon obj'); //{ name: 'abu hossain', age: 400 } clon obj
+
+
+
