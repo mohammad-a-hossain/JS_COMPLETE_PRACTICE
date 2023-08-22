@@ -510,3 +510,127 @@ console.log(clonObj,'clon obj'); //{ name: 'abu hossain', age: 400 } clon obj
 
 
 
+
+//======================= LET CONST VAR ===============================================
+
+
+// TRICK 1
+//BLOCK SCOPE global scope and function scope
+
+var t= 'title'
+{
+  let f= 144;
+  console.log(f); // 144
+}
+ // console.log(f);//ReferenceError: f is not defined so this can not be call outside scope
+
+ {
+  const g= 144;
+  console.log(g); // 144
+}
+ // console.log(f);//ReferenceError: f is not defined so this can not be call outside scope.
+
+console.log(t); // title 
+
+  /* 
+  
+  note : let and const are  block scope and var is global scope
+
+  */ 
+
+// Variable shadowing
+
+
+(function test(){
+  let a = 'hello00'
+  if(true){
+    let a = 'hi'
+    console.log(a); // hi
+  }
+  console.log(a);// hello00
+})()
+
+
+
+/* 
+function test1(){
+  var a = 'shadowing'
+  let b= 'is shadowing' // ithis is called illigal shadowing
+  if(true){
+    let a = 'not shadowing !!'
+    var b ='ins not shadowing' // ithis is called illigal shadowing
+
+    console.log(a);
+    console.log(b);
+  }
+}
+ */
+
+// declaratoin 
+
+var aa  
+var aa 
+
+/* // const must initialize first and const never update the value 
+
+const dd= 33 // can not redeclare block scopr
+// const dd =44 
+
+*/
+
+
+/* 
+
+let cc //Cannot redeclare block-scoped variable 'cc'.
+let cc 
+ */
+
+var d3= 44 
+
+var d3= 43 
+
+ //   WHAT IS HOISTING ? CREATTION PHASE AND EXECUTION PHASE 
+
+ /* 
+ DURING THE CREATION PHASE JS STORE THE VAR AND FUNCTION TO THE TOP OF THE CODE 
+ THIS IS CALLED HOISTING. 
+ */
+
+var p // so var is hoisted
+console.log(p,'p val'); // undefined
+p =34
+
+console.log(p,'p val'); // 34 p v alue
+
+
+ // console.log(yy); //ReferenceError: Cannot access 'yy' before initialization 
+let yy= 'bd'
+
+// here let is hoisted on temporal dead zone 
+
+/* 
+ what is temporal dead zone ?
+
+ it meanse the time between the declaration and initialzatin of let and const variable
+ so the variables are in the scope but they are not decalred yet
+*/
+abc()
+function abc(){
+  console.log(a3); // undefined because the a3 var is not hoisted 
+  var a3= 'bangladesh'
+}
+
+
+
+/* 
+function cde(){ // here d and e is in temporal dead zone and c is not hoisted
+  console.log(c,d,e);//ReferenceError: Cannot access 'd' before initialization
+  let d=44
+  const e= 43
+  var c=33
+}
+cde() */
+
+console.log(f3, f2); // can not access before initialization 
+let f3='hosistin'
+const f2='is hoistin'
