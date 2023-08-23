@@ -631,6 +631,161 @@ function cde(){ // here d and e is in temporal dead zone and c is not hoisted
 }
 cde() */
 
+/*
+
 console.log(f3, f2); // can not access before initialization 
 let f3='hosistin'
 const f2='is hoistin'
+
+
+ */
+
+
+/* ==================this========================== */
+
+this.p= 4
+this.q= 6
+//console.log(this.p);
+//console.log(this);
+
+
+function thisiS(){
+  console.log(this.p);
+}
+thisiS()
+
+const res3s=() =>{
+  console.log(this.q);
+}
+console.log(res3s());
+
+let user4 ={
+  name:'suhel', age:44,
+  getName:{
+    //console.log(this.name);
+    name2: 'abusen',
+    getInsideName(){
+      console.log(this.name, this.name2); // here this.name is undefined cause this 
+    }
+  }
+}
+//user4.getName()
+user4.getName.getInsideName()
+
+
+
+
+const people = {
+  firstName : 'abu',
+  getName(){
+   const firstName = 'labu'
+   return this.firstName // here this refer the parent obj firstName is Abu
+  }
+}
+ console.log(people.getName())
+
+
+
+ // trick question ?? what is the out put
+
+ function server(){
+   return{
+     name: 'lama',
+     ref: this 
+}
+ }
+
+ let serv=  server()
+ console.log(serv.ref.name); // undefained 
+
+
+
+ // trick what is the output ?
+
+ const mene={
+   lastName: 'hossain',
+   getLastName(){
+    console.log(this.lastName);
+   }
+ }
+
+  setTimeout(mene.getLastName, 2000) // undefained ***because the setTime out fun has 2 sec time 
+ // and it can not access mene fun rather it will find window objdect where it can not find lastName
+
+ // soulution
+
+ setTimeout(()=>{
+ console.log(mene.getLastName()); // hossain
+ },3000)
+
+
+
+ // trick what is the out put of the code ??
+
+ const Names={
+   names : 'magbub',
+   greet(){
+    return `hello ${this.names}`;
+   },
+   goodbuy:()=>{
+   return `goodby ${this.name}`
+   }
+ }
+
+ console.log(Names.greet()); // hello magbub
+ console.log(Names.goodbuy()); // goodby undefined **because the arrow fun point the window object and find no name var
+
+
+
+ // trick what is the out put ?
+
+ var length= 4 
+
+ function callback(){
+  console.log(this.length); //// here this fun is pointing to the global variable so the length is 4 
+ }
+
+ const obj={
+  length :44,
+   method(fun){
+    fun() 
+
+  }
+ }
+
+ obj.method(callback) // 4 
+
+
+ // trick what is the out put ?
+
+ //const resu = calck.add(5).multiply(3).substruct(2).add(2) // 
+
+ //console.log(resu);
+
+ const  calck ={
+ total : 0,
+  add(n){
+    this.total += n;
+    return this 
+  },
+  multiply(n){
+    this.total *= n;
+    return this
+  },
+  substruct(n){
+    this.total -= n;
+    return this
+  },
+
+ }
+
+ const resu = calck.add(5).multiply(3).substruct(2).add(2)
+
+ //console.log(resu.multiply(19));
+ console.log(resu.total);//15
+
+
+
+
+
+ /* ============ function ======================================== */
